@@ -28,7 +28,7 @@ public class Jte extends BaseBenchmark {
     public void setup() {
         items = Stock.dummyItems();
 
-        templateEngine = TemplateEngine.createPrecompiled(Path.of("jte-classes"), ContentType.Plain);
+        templateEngine = TemplateEngine.createPrecompiled(Path.of("jte-classes"), ContentType.Html);
         templateEngine.prepareForRendering("stocks.jte");
     }
 
