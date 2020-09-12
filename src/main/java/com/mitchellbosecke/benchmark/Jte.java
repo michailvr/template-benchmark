@@ -28,8 +28,7 @@ public class Jte extends BaseBenchmark {
     public void setup() {
         items = Stock.dummyItems();
 
-        // Using ContentType.Plain instead of ContentType.Html according to Rules of Template Engine Configuration.
-        templateEngine = TemplateEngine.createPrecompiled(Path.of("jte-classes"), ContentType.Plain);
+        templateEngine = TemplateEngine.createPrecompiled(Path.of("jte-classes"), ContentType.Html);
         templateEngine.prepareForRendering("stocks.jte");
     }
 

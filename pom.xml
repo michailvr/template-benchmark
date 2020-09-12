@@ -76,7 +76,7 @@
 				<configuration>
 					<sourceDirectory>src/main/resources/templates</sourceDirectory>
 					<targetDirectory>jte-classes</targetDirectory>
-					<contentType>Plain</contentType>
+					<contentType>Html</contentType>
 				</configuration>
 				<executions>
 					<execution>
