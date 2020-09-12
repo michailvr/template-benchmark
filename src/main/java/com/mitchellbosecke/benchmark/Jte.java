@@ -2,10 +2,10 @@ package com.mitchellbosecke.benchmark;
 
 
 import com.mitchellbosecke.benchmark.model.Stock;
-import org.jusecase.jte.ContentType;
-import org.jusecase.jte.TemplateEngine;
-import org.jusecase.jte.output.StringOutput;
-import org.jusecase.jte.output.StringOutputPool;
+import gg.jte.ContentType;
+import gg.jte.TemplateEngine;
+import gg.jte.output.StringOutput;
+import gg.jte.output.StringOutputPool;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Setup;
 
@@ -28,7 +28,8 @@ public class Jte extends BaseBenchmark {
     public void setup() {
         items = Stock.dummyItems();
 
-        templateEngine = TemplateEngine.createPrecompiled(Path.of("jte-classes"), ContentType.Html);
+        // Using ContentType.Plain instead of ContentType.Html according to Rules of Template Engine Configuration.
+        templateEngine = TemplateEngine.createPrecompiled(Path.of("jte-classes"), ContentType.Plain);
         templateEngine.prepareForRendering("stocks.jte");
     }
 

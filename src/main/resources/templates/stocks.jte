@@ -1,6 +1,6 @@
 @import java.util.List
 @import com.mitchellbosecke.benchmark.model.Stock
-@import org.jusecase.jte.support.ForSupport
+@import gg.jte.support.ForSupport
 
 @param List<Stock> items
 
