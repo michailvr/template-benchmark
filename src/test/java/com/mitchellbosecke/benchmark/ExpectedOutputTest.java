@@ -68,13 +68,6 @@ public class ExpectedOutputTest {
     }
 
     @Test
-    public void testTrimouOutput() throws IOException {
-        Trimou trimou = new Trimou();
-        trimou.setup();
-        assertOutput(trimou.benchmark());
-    }
-
-    @Test
     public void testHbsOutput() throws IOException {
         Handlebars hbs = new Handlebars();
         hbs.setup();
