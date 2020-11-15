@@ -2,6 +2,8 @@
 .classpath
 .settings
 target/
+jte-classes/
+.idea/
 *.jar
 *.war
 *.ear
