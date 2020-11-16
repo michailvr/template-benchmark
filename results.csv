@@ -7,3 +7,4 @@
 "com.mitchellbosecke.benchmark.Rocker.benchmark","thrpt",32,50,795294.980998,8814.678795,"ops/s"
 "com.mitchellbosecke.benchmark.Thymeleaf.benchmark","thrpt",32,50,79091.720578,317.283150,"ops/s"
 "com.mitchellbosecke.benchmark.Trimou.benchmark","thrpt",32,50,396397.592834,1926.939519,"ops/s"
+"com.mitchellbosecke.benchmark.Velocity.benchmark","thrpt",32,50,507404.569310,5332.323282,"ops/s"
