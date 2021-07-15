@@ -11,6 +11,7 @@ JMH benchmark for popular Java template engines:
 * [Thymeleaf](http://www.thymeleaf.org/)
 * [Trimou](http://trimou.org/)
 * [Velocity](http://velocity.apache.org/)
+* [Xslt](https://xml.apache.org/xalan-j/)
 
 Running the benchmark
 ======================

@@ -1,18 +1,17 @@
 package com.mitchellbosecke.benchmark;
 
-import static org.junit.Assert.assertEquals;
+import com.mitchellbosecke.pebble.error.PebbleException;
+import freemarker.template.TemplateException;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
+import javax.xml.transform.TransformerException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Locale;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import com.mitchellbosecke.pebble.error.PebbleException;
-
-import freemarker.template.TemplateException;
+import static org.junit.Assert.assertEquals;
 
 /**
  *
@@ -31,10 +30,17 @@ public class ExpectedOutputTest {
         freemarker.setup();
         assertOutput(freemarker.benchmark());
     }
-    
+
     @Test
     public void testRockerOutput() throws IOException, TemplateException {
         Rocker rocker = new Rocker();
+        rocker.setup();
+        assertOutput(rocker.benchmark());
+    }
+
+    @Test
+    public void testRockerRuntimeOutput() throws IOException, TemplateException {
+        RockerRuntime rocker = new RockerRuntime();
         rocker.setup();
         assertOutput(rocker.benchmark());
     }
@@ -88,13 +94,25 @@ public class ExpectedOutputTest {
         assertOutput(jte.benchmark());
     }
 
-    private void assertOutput(final String output) throws IOException {
-        assertEquals(readExpectedOutputResource(), output.replaceAll("\\s", ""));
+    @Test
+    public void testXslOutput() throws IOException, TransformerException {
+        Xsl xsl = new Xsl();
+        xsl.setup();
+        assertOutputXslt(xsl.benchmark());
     }
 
-    private String readExpectedOutputResource() throws IOException {
+    private void assertOutput(final String output) throws IOException {
+        assertEquals(readExpectedOutputResource("/expected-output.html"), output.replaceAll("\\s", ""));
+    }
+
+    private void assertOutputXslt(final String output) throws IOException {
+        assertEquals(readExpectedOutputResource("/expected-output-xslt.html"), output.replaceAll("\\s", ""));
+    }
+
+    private String readExpectedOutputResource(String resource) throws IOException {
         StringBuilder builder = new StringBuilder();
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(ExpectedOutputTest.class.getResourceAsStream("/expected-output.html")))) {
+        //noinspection ConstantConditions
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(ExpectedOutputTest.class.getResourceAsStream(resource)))) {
             for (;;) {
                 String line = in.readLine();
                 if (line == null) {

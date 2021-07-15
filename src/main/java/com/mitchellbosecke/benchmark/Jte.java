@@ -20,7 +20,9 @@ import java.util.List;
  * @author casid
  */
 public class Jte extends BaseBenchmark {
+
     private static final StringOutputPool stringOutputPool = new StringOutputPool();
+
     private TemplateEngine templateEngine;
     private List<Stock> items;
 

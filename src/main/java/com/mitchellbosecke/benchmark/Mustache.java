@@ -1,5 +1,12 @@
 package com.mitchellbosecke.benchmark;
 
+import com.github.mustachejava.DefaultMustacheFactory;
+import com.github.mustachejava.MustacheException;
+import com.github.mustachejava.MustacheFactory;
+import com.mitchellbosecke.benchmark.model.Stock;
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Setup;
+
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -7,14 +14,6 @@ import java.util.AbstractCollection;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
-
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Setup;
-
-import com.github.mustachejava.DefaultMustacheFactory;
-import com.github.mustachejava.MustacheException;
-import com.github.mustachejava.MustacheFactory;
-import com.mitchellbosecke.benchmark.model.Stock;
 
 public class Mustache extends BaseBenchmark {
 
@@ -54,9 +53,8 @@ public class Mustache extends BaseBenchmark {
      * {@link com.github.mustachejava.util.DecoratedCollection} - we need the
      * first element at index 1.
      *
-     * @param <T>
      */
-    private class StockCollection extends AbstractCollection<StockView> {
+    private static class StockCollection extends AbstractCollection<StockView> {
 
         private final Collection<Stock> c;
 
@@ -67,7 +65,7 @@ public class Mustache extends BaseBenchmark {
         @Override
         public Iterator<StockView> iterator() {
             final Iterator<Stock> iterator = c.iterator();
-            return new Iterator<StockView>() {
+            return new Iterator<>() {
 
                 int index = 1;
 
@@ -96,7 +94,7 @@ public class Mustache extends BaseBenchmark {
         }
     }
 
-    class StockView {
+    static class StockView {
 
         public final int index;
 

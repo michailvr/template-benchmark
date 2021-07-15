@@ -1,0 +1,90 @@
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                version="1.0">
+
+	<xsl:output method="html"
+                indent="no"
+                omit-xml-declaration="no"
+                encoding="UTF-8"/>
+	<xsl:template match="/">
+		<xsl:text disable-output-escaping="yes"><![CDATA[<!DOCTYPE html>]]></xsl:text>
+		<html>
+		<head>
+			<title>Stock Prices</title>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<meta http-equiv="Content-Style-Type" content="text/css" />
+			<meta http-equiv="Content-Script-Type" content="text/javascript" />
+			<link rel="shortcut icon" href="/images/favicon.ico" />
+			<link rel="stylesheet" type="text/css" href="/css/style.css" media="all" />
+			<script type="text/javascript" src="/js/util.js"></script>
+			<style type="text/css">
+				body {
+					color: #333333;
+					line-height: 150%;
+				}
+
+				thead {
+					font-weight: bold;
+					background-color: #CCCCCC;
+				}
+
+				.odd {
+					background-color: #FFCCCC;
+				}
+
+				.even {
+					background-color: #CCCCFF;
+				}
+
+				.minus {
+					color: #FF0000;
+				}
+			</style>
+		</head>
+
+		<body>
+
+			<h1>Stock Prices</h1>
+
+			<table>
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>symbol</th>
+						<th>name</th>
+						<th>price</th>
+						<th>change</th>
+						<th>ratio</th>
+					</tr>
+				</thead>
+				<tbody>
+					<xsl:apply-templates select="items"/>
+				</tbody>
+			</table>
+		</body>
+		</html>
+	</xsl:template>
+
+	<xsl:template match="item">
+		<tr>
+			<xsl:attribute name="class">
+				<xsl:choose>
+					<xsl:when test="position() mod 2 = 0">even</xsl:when>
+					<xsl:otherwise>odd</xsl:otherwise>
+				</xsl:choose>
+			</xsl:attribute>
+			<td><xsl:value-of select="position()"/></td>
+			<td>
+				<a href="/stocks/{symbol}"><xsl:value-of select="symbol" disable-output-escaping="yes"/></a>
+			</td>
+			<td>
+				<a href="{url}"><xsl:value-of select="name" disable-output-escaping="yes"/></a>
+			</td>
+			<td>
+				<strong><xsl:value-of select="price" disable-output-escaping="yes"/></strong>
+			</td>
+			<td><xsl:if test="change &lt; 0.0"><xsl:attribute name="class">minus</xsl:attribute></xsl:if><xsl:value-of select="change" disable-output-escaping="yes"/></td>
+			<td><xsl:if test="change &lt; 0.0"><xsl:attribute name="class">minus</xsl:attribute></xsl:if><xsl:value-of select="ratio" disable-output-escaping="yes"/></td>
+		</tr>
+	</xsl:template>
+
+</xsl:stylesheet>
